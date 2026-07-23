@@ -175,7 +175,7 @@ VariantFiltering_RNASeq_BankVoles/
 Clone the repository
 
 ```bash
-git clone https://github.com/AyushiPathak/VariantFiltering_RNASeq_BankVoles.git
+git clone https://github.com/NatureToNeurons/variant-filtering-RNAseq-bankvoles.git
 
 cd VariantFiltering_RNASeq_BankVoles
 ```

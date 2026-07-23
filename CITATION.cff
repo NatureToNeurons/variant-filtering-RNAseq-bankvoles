@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+
+title: "Variant Filtering from RNA-Seq Data in Bank Voles"
+
+message: >
+  If you use this repository in your research,
+  please cite it using the metadata below.
+
+type: software
+
+authors:
+  - family-names: Pathak
+    given-names: Ayushi
+
+repository-code: "https://github.com/NatureToNeurons/variant-filtering-RNAseq-bankvoles"
+
+url: "https://github.com/NatureToNeurons/variant-filtering-RNAseq-bankvoles"
+
+license: MIT
+
+version: "1.0.0"
+
+date-released: "2026-07-23"
+
+abstract: >
+  A modular and reproducible RNA-Seq variant calling workflow following
+  GATK Best Practices for transcriptome variant discovery in
+  Myodes glareolus (Bank Vole).
+
+keywords:
+  - RNA-Seq
+  - Variant Calling
+  - GATK
+  - STAR
+  - Bioinformatics
+  - Bash
+  - Linux
+  - Computational Biology
+  - Transcriptomics
+  - Genomics

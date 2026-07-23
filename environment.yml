@@ -1,0 +1,45 @@
+name: rnaseq_variant_pipeline
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+
+  # Python
+  - python=3.11
+
+  # Workflow
+  - snakemake>=8
+
+  # RNA-Seq
+  - star
+
+  # Alignment utilities
+  - samtools
+  - bcftools
+  - htslib
+
+  # Variant calling
+  - gatk4
+  - picard
+
+  # Quality control
+  - fastqc
+  - multiqc
+
+  # Utilities
+  - openjdk
+  - wget
+  - curl
+  - pigz
+
+  # Python packages
+  - pandas
+  - numpy
+  - matplotlib
+  - jupyter
+
+  # Optional
+  - pysam
