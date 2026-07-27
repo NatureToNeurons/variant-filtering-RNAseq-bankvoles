@@ -1,0 +1,4 @@
+sample_id    read1                          read2
+BV01         BV01_R1.fastq.gz               BV01_R2.fastq.gz
+BV02         BV02_R1.fastq.gz               BV02_R2.fastq.gz
+BV03         BV03_R1.fastq.gz               BV03_R2.fastq.gz

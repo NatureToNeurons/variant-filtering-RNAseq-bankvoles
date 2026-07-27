@@ -1,0 +1,27 @@
+###############################################################################
+# Directory Structure
+###############################################################################
+
+raw_data: "data/raw"
+
+reference: "data/reference"
+
+intermediate: "data/intermediate"
+
+results: "data/results"
+
+###############################################################################
+# Outputs
+###############################################################################
+
+fastqc: "data/results/fastqc"
+
+bam: "output/bam"
+
+variants: "output/vcf"
+
+filtered_variants: "output/filtered_vcf"
+
+reports: "output/reports"
+
+logs: "logs"

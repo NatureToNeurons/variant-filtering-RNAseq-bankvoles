@@ -2,14 +2,17 @@
 
 ###############################################################################
 #
-# File: utils.sh
-#
-# Repository:
-# Variant Filtering from RNA-Seq Data in Bank Voles
+# File: 00_utils.sh
 #
 # Description:
 # Common utility functions used throughout the RNA-Seq variant calling
-# pipeline.
+# workflow.
+#
+# Project:
+# Variant Filtering from RNA-Seq Data in Bank Voles
+#
+# Repository:
+# https://github.com/NatureToNeurons/variant-filtering-RNAseq-bankvoles
 #
 # Author:
 # Ayushi Pathak
@@ -27,19 +30,19 @@ timestamp() {
 }
 
 log_info() {
-    echo "[$(timestamp)] [INFO] $*"
+    printf "[%s] [INFO] %s\n" "$(timestamp)" "$*"
 }
 
 log_warning() {
-    echo "[$(timestamp)] [WARNING] $*" >&2
+    printf "[%s] [WARNING] %s\n" "$(timestamp)" "$*" >&2
 }
 
 log_error() {
-    echo "[$(timestamp)] [ERROR] $*" >&2
+    printf "[%s] [ERROR] %s\n" "$(timestamp)" "$*" >&2
 }
 
 ###############################################################################
-# Error Handling
+# Exit on Error
 ###############################################################################
 
 die() {
@@ -48,20 +51,70 @@ die() {
 }
 
 ###############################################################################
-# Check if required software exists
+# Section Headers
+###############################################################################
+
+print_header() {
+
+    echo
+    echo "======================================================================="
+    echo "$1"
+    echo "======================================================================="
+    echo
+
+}
+
+print_footer() {
+
+    echo
+    echo "-----------------------------------------------------------------------"
+    echo "$1"
+    echo "-----------------------------------------------------------------------"
+    echo
+
+}
+
+###############################################################################
+# Software Validation
 ###############################################################################
 
 check_program() {
 
     local program="$1"
 
-    command -v "$program" >/dev/null 2>&1 || \
-        die "$program is not installed or not found in PATH."
+    command -v "$program" >/dev/null 2>&1 \
+        || die "$program was not found in PATH."
 
 }
 
 ###############################################################################
-# Create directory if missing
+# File Validation
+###############################################################################
+
+check_file() {
+
+    local file="$1"
+
+    [[ -f "$file" ]] \
+        || die "Missing file: $file"
+
+}
+
+###############################################################################
+# Directory Validation
+###############################################################################
+
+check_directory() {
+
+    local directory="$1"
+
+    [[ -d "$directory" ]] \
+        || die "Missing directory: $directory"
+
+}
+
+###############################################################################
+# Directory Creation
 ###############################################################################
 
 create_dir() {
@@ -73,59 +126,22 @@ create_dir() {
 }
 
 ###############################################################################
-# Verify file exists
+# CPU Detection
 ###############################################################################
 
-check_file() {
+available_threads() {
 
-    local file="$1"
-
-    [[ -f "$file" ]] || die "Missing file: $file"
+    if command -v nproc >/dev/null 2>&1
+    then
+        nproc
+    else
+        echo 1
+    fi
 
 }
 
 ###############################################################################
-# Verify directory exists
-###############################################################################
-
-check_directory() {
-
-    local directory="$1"
-
-    [[ -d "$directory" ]] || die "Missing directory: $directory"
-
-}
-
-###############################################################################
-# Print Section Header
-###############################################################################
-
-print_header() {
-
-    echo
-    echo "============================================================"
-    echo "$1"
-    echo "============================================================"
-    echo
-
-}
-
-###############################################################################
-# Print Footer
-###############################################################################
-
-print_footer() {
-
-    echo
-    echo "------------------------------------------------------------"
-    echo "$1"
-    echo "------------------------------------------------------------"
-    echo
-
-}
-
-###############################################################################
-# Check available disk space
+# Disk Space
 ###############################################################################
 
 check_disk_space() {
@@ -135,30 +151,25 @@ check_disk_space() {
 }
 
 ###############################################################################
-# Check number of CPU threads
+# Start Timer
 ###############################################################################
 
-available_threads() {
+start_timer() {
 
-    nproc
+    START_TIME=$(date +%s)
 
 }
 
 ###############################################################################
-# Export functions
+# Stop Timer
 ###############################################################################
 
-export -f \
-timestamp \
-log_info \
-log_warning \
-log_error \
-die \
-check_program \
-create_dir \
-check_file \
-check_directory \
-print_header \
-print_footer \
-check_disk_space \
-available_threads
+stop_timer() {
+
+    END_TIME=$(date +%s)
+
+    ELAPSED=$((END_TIME-START_TIME))
+
+    log_info "Elapsed time: ${ELAPSED} seconds"
+
+}
